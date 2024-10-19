@@ -10,14 +10,14 @@ const restaurantData = [
         name: 'Chicken Biryani',
         description: 'Delicious chicken biryani',
         price: 12,
-        image: '/chicken  biryani.jpg', // Image for Chicken Biryani
+        image: '/chicken  biryani.jpg',
       },
       {
         id: '2',
         name: 'Paneer Tikka Masala',
         description: 'Paneer tikka',
         price: 10,
-        image: '/Paneer Tikka Masala _ Easy Paneer Tikka Masala Gravy - Cooking From Heart.jpg', // Image for Paneer Tikka
+        image: '/Paneer Tikka Masala _ Easy Paneer Tikka Masala Gravy - Cooking From Heart.jpg',
       },
     ],
   },
@@ -32,14 +32,36 @@ const restaurantData = [
         name: 'Blueberry Cheese Cake',
         description: 'Triple chocolate waffle',
         price: 8,
-        image: '/Vegan Lemon Blueberry Cheesecake.jpg', // Image for Blueberry Cheese Cake
+        image: '/Vegan Lemon Blueberry Cheesecake.jpg',
       },
       {
         id: '2',
         name: 'Lotus Biscoff Cheese Cake',
         description: 'Lotus Biscoff Cheese',
         price: 6,
-        image: '/No-Bake Lotus Biscoff Cheesecake.jpg', // Image for Lotus Biscoff Cheese Cake
+        image: '/No-Bake Lotus Biscoff Cheesecake.jpg',
+      },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Mehfil',
+    description: 'Tasty biryani',
+    image: '/15 Best Things To Do In Mumbai, India - Hand Luggage Only - Travel, Food And Photography Blog.jpg',
+    items: [
+      {
+        id: '1',
+        name: 'Shawarma',
+        description: 'Triple chocolate waffle',
+        price: 80,
+        image: '/Premium Photo _ Doner kebab a shawarma in a pit of fresh vegetables and meat with large spices restaurant serving on___.jpg',
+      },
+      {
+        id: '2',
+        name: 'Biryani',
+        description: 'Lotus Biscoff Cheese',
+        price: 6,
+        image: '/STEP BY STEP HOW TO MAKE HYDERABADI BRIYANI.jpg',
       },
     ],
   },

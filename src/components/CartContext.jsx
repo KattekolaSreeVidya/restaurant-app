@@ -14,7 +14,18 @@ export const CartProvider = ({ children }) => {
 
   // Function to add item to the cart
   const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+    const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+      // If the item already exists, increase its quantity
+      setCartItems(cartItems.map(cartItem =>
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      ));
+    } else {
+      // Otherwise, add it as a new item
+      setCartItems((prevItems) => [...prevItems, { ...item, quantity: 1 }]);
+    }
   };
 
   // Function to clear the cart
@@ -22,8 +33,13 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
+  // Function to get total count of items in the cart
+  const getCartCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, clearCart }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, addToCart, clearCart, getCartCount }}>
       {children}
     </CartContext.Provider>
   );

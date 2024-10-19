@@ -1,4 +1,8 @@
 /* General Styles */
+.centered-heading {
+  text-align: center;       /* Center align the text */
+  margin: 20px 0;          /* Optional: Add some margin for spacing */
+}
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -95,11 +99,18 @@ a {
 
 /* Restaurant List Styles */
 .restaurant-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
   margin: 40px 0;
   padding: 0 20px;
+  
+}
+
+/* Restaurant Cards Container */
+.restaurant-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  padding-bottom: 20px;
 }
 
 /* Restaurant Card Styles */
@@ -111,13 +122,78 @@ a {
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  height: 400px;
+  flex: 0 0 calc(50% - 20px);
+  max-width: calc(50% - 20px);
+  margin-right: 0;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;  /* Full height */
+  width: 300px;
+}
+
+@media (max-width: 1200px) {
+  .restaurant-card {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .restaurant-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 .restaurant-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
+
+/* Consistent Image Height */
+.restaurant-card img {
+  object-fit: cover;
+  height: 200px; /* Uniform image height */
+  width: 100%;
+}
+
+/* Card Content */
+.restaurant-card .card-content {
+  padding: 15px;
+  flex-grow: 1;  /* Ensure the content grows and fills space */
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;  /* Ensure spacing between elements */
+}
+
+/* View Menu Button */
+.restaurant-card .view-menu {
+  background-color: #28a745;
+  color: #fff;
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: auto;  /* Push button to the bottom */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Adjust responsiveness */
+@media (max-width: 768px) {
+  .restaurant-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.restaurant-card .view-menu:hover {
+  background-color: #218838;
+}
+
 
 /* Card Image Styles */
 .restaurant-card img {
@@ -132,15 +208,21 @@ a {
   padding: 20px;
   background-color: #fff;
   position: relative;
-  height: 150px;
+  flex-grow: 1;  /* Allow details to grow and push button to bottom */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Restaurant Name Styles */
 .restaurant-card h3 {
   margin: 0 0 10px 0;
-  font-size: 1.8em;
+  font-size: 1.5rem;
   color: #333;
   font-weight: 600;
+  margin-bottom: 10px;
+  height: 3.6rem;  /* Fixed height for title */
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 /* Restaurant Description Styles */
@@ -149,60 +231,132 @@ a {
   color: #666;
   margin: 0 0 20px 0;
   line-height: 1.6;
+  flex-grow: 1;
+  display: -webkit-box;
+  height: 3rem;
+  margin-bottom: 15px;
+  overflow: hidden;
+
+}
+
+/* View Menu Button Styles */
+.view-menu-button {
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  margin-top: auto;  /* Push button to bottom of card */
+  align-self: flex-start;  /* Align button to the left */
+}
+
+.view-menu-button:hover {
+  background-color: #388E3C;
+}
+
+/* No Restaurants Message */
+.no-restaurants-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #777;
+  padding: 20px;
+}
+
+.action-buttons {
+  margin-top: 10px; /* Space above the buttons */
+}
+
+.action-buttons button {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Round corners */
+  padding: 8px 12px; /* Padding for buttons */
+  cursor: pointer; /* Pointer cursor for buttons */
+  transition: background-color 0.3s; /* Smooth background color transition */
+  margin-right: 5px; /* Space between buttons */
+}
+
+.action-buttons button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.action-buttons button.delete {
+  background-color: #dc3545; /* Bootstrap danger color for delete */
+}
+
+.action-buttons button.delete:hover {
+  background-color: #c82333; /* Darker shade for delete on hover */
 }
 
 /* Menu Styles */
 .menu {
-  margin: 20px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 0 20px;
+  display: flex;                  /* Enable flexbox */
+  flex-wrap: wrap;               /* Allow wrapping to the next line */
+  gap: 20px;                     /* Spacing between menu items */
+  margin: 20px 0;                /* Margin around the menu */
+  padding: 0 20px;               /* Padding inside the menu */
+  justify-content: flex-start;   /* Align items to the left */
 }
 
 /* Menu Item Styles */
 .menu-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  height: 400px;
+  flex: 0 0 200px;               /* Adjusted width for each menu item */
+  display: flex;                 /* Enable flexbox for each item */
+  flex-direction: column;        /* Stack content vertically within the item */
+  justify-content: space-between; /* Space out content */
+  padding: 10px;                 /* Reduced padding inside each item */
+  background-color: #fff;        /* Background color */
+  border: none;                  /* No border */
+  border-radius: 10px;           /* Rounded corners */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition effects */
+  position: relative;            /* Positioning context */
+  height: 300px;                 /* Adjusted height for consistent sizing */
+  overflow: hidden;              /* Prevent overflow of content */
 }
 
+/* Hover effects for menu items */
 .menu-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);   /* Slight upward movement on hover */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 .menu-item h4 {
-  margin: 0;
-  font-size: 1.6em;
-  font-weight: 600;
-  color: #333;
+  margin: 0;                     /* No margin for headings */
+  font-size: 1.2em;              /* Adjusted font size for heading */
+  font-weight: 600;              /* Bold weight for heading */
+  color: #333;                   /* Heading color */
+  overflow: hidden;              /* Prevent heading overflow */
+  text-overflow: ellipsis;       /* Ellipsis for overflowing text */
+  white-space: nowrap;           /* Prevent line breaks */
 }
 
 .menu-item p {
-  margin: 10px 0;
-  font-size: 1em;
-  color: #666;
-  line-height: 1.6;
+  margin: 5px 0;                 /* Reduced margin for paragraphs */
+  font-size: 0.8em;              /* Adjusted font size for paragraphs */
+  color: #666;                   /* Paragraph color */
+  line-height: 1.4;              /* Line height for readability */
+  overflow: hidden;              /* Prevent paragraph overflow */
+  text-overflow: ellipsis;       /* Ellipsis for overflowing text */
+  white-space: nowrap;           /* Prevent line breaks */
 }
 
 /* Menu Item Image Styles */
 .menu-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  width: 100%;                   /* Full width for images */
+  height: 150px;                 /* Reduced height for images */
+  object-fit: cover;             /* Cover the area without distortion */
+  border-radius: 10px;           /* Rounded corners for images */
+  margin-bottom: 10px;           /* Margin below images */
 }
+
+
 
 /* Cost Styles */
 .menu-item .cost {
@@ -218,11 +372,13 @@ a {
   transform: translateY(0px);
   transition: transform 0.3s ease;
 }
+
 /* Update to Rupee Symbol */
 .menu-item .cost::before {
-  content: "₹"; /* Change from dollar symbol to rupee symbol */
-  margin-right: 5px; /* Space between the symbol and cost */
+  content: "₹";
+  margin-right: 5px;
 }
+
 .menu-item:hover .cost {
   transform: translateY(-10px) scale(1.2);
 }
@@ -244,20 +400,6 @@ a {
   background-color: #e68a00;
 }
 
-/* Pop Effect for Cost */
-.menu-item .cost {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  background-color: rgba(255, 87, 51, 0.9); /* Orange background with slight transparency */
-  padding: 8px 12px;
-  border-radius: 50%;
-  font-weight: bold;
-  color: #fff;
-  transform: translateY(0px);
-  transition: transform 0.3s ease;
-}
-
 /* Restaurant Card Hover Effect */
 .restaurant-card::before {
   content: "";
@@ -277,87 +419,537 @@ a {
 
 /* Cart Styles */
 .cart {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
-  max-width: 800px;
+  max-width: 600px;
+  font-family: Arial, sans-serif;
+}
+
+.cart h1 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .cart-item:last-child {
   border-bottom: none;
 }
 
-.cart-item h4 {
-  font-size: 1.2em;
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-item h3 {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 5px 0;
 }
 
 .cart-item p {
-  color: #777;
+  font-size: 0.9em;
+  color: #666;
+  margin: 0;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.cart-item-quantity button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  font-size: 1.2em;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cart-item-quantity span {
+  margin: 0 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.cart-item .price {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  margin-left: 20px;
+}
+
+.cart-item button:last-of-type {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
+.cart-item button:last-of-type:hover {
+  background-color: #d32f2f;
+}
+
+.cart-suggestions {
+  margin: 20px 0;
+  font-style: italic;
+  color: #666;
+}
+
+.no-contact-delivery {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.no-contact-delivery label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.no-contact-delivery input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Bill Details */
+.bill-details {
+  margin-top: 20px;
+}
+
+.bill-details h2 {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.bill-details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.bill-details-row:last-child {
+  font-weight: 600;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* Checkout button styles */
+.cart button:last-of-type {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cart button:last-of-type:hover {
+  background-color: #45a049;
+}
+
+/* Checkout Page Styles */
+.checkout {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.checkout h1 {
+  color: #4CAF50;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.checkout h2 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.cart-review {
+  margin-bottom: 30px;
+}
+
+.cart-review .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-review .cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #4CAF50;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout-form label {
+  font-weight: 500;
+  color: #333;
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   font-size: 1em;
 }
 
-.cart-item .cost {
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #ff5733;
+.checkout-form textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
-/* Cart Item Image Styles */
-.cart-item img {
-  width: 100px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-right: 20px;
-}
-
-/* Checkout Button */
-.proceed-to-checkout {
+.submit-payment {
   background-color: #4CAF50;
-  color: #fff;
+  color: white;
+  padding: 12px 20px;
   border: none;
-  padding: 12px 24px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 500;
-  display: block;
-  margin: 20px auto;
   transition: background-color 0.3s ease;
 }
 
-.proceed-to-checkout:hover {
-  background-color: #388e3c;
+.submit-payment:hover {
+  background-color: #45a049;
 }
 
-/* Responsive Styles */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .restaurant-list {
-    grid-template-columns: 1fr;
+  .checkout {
+    padding: 20px;
+    margin: 20px;
   }
 
-  .menu {
-    grid-template-columns: 1fr;
+  .checkout h1 {
+    font-size: 1.8em;
   }
 
-  .menu-item {
-    height: auto;
-  }
-
-  .restaurant-card {
-    height: auto;
-  }
-
-  .header-nav {
-    flex-direction: column;
+  .checkout h2 {
+    font-size: 1.3em;
   }
 }
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Form Container */
+.add-restaurant-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Header */
+.add-restaurant-form h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5rem;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="url"],
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Textarea */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit Button */
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-restaurant-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Optional: Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.add-restaurant-form {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Optional: Custom Scrollbar */
+.add-restaurant-form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.add-restaurant-form::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.add-restaurant-form::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.add-restaurant-form::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* Existing styles... */
+
+.add-restaurant-button {
+  display: inline-block; /* Make it behave like a button */
+  background-color: #28a745; /* Bootstrap success color */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Round corners */
+  padding: 3px 7px; /* Increased padding for larger button size */
+  font-size: 16px; /* Larger font size */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+  margin: 20px 0; /* Space around the button */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.add-restaurant-button:hover {
+  background-color: #218838; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+
+.add-restaurant-button:active {
+  transform: translateY(0);
+}
+
+/* Adjust the restaurant list container to accommodate the button */
+.restaurant-list {
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-restaurant-button {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    text-align: center;
+  }
+}
+
+/* Styles for the Edit Restaurant Page */
+.edit-restaurant {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the form */
+  padding: 20px; /* Padding around the page */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 500px; /* Max width for the form */
+  margin: auto; /* Center the form horizontally */
+}
+
+.edit-restaurant h1 {
+  margin-bottom: 20px; /* Space below the heading */
+  font-size: 24px; /* Heading size */
+  color: #333; /* Dark text color */
+}
+
+.edit-restaurant form {
+  width: 100%; /* Full width of the container */
+}
+
+.edit-restaurant label {
+  display: block; /* Block display for labels */
+  margin-bottom: 5px; /* Space below labels */
+  font-weight: bold; /* Bold labels */
+}
+
+.edit-restaurant input,
+.edit-restaurant textarea {
+  width: 100%; /* Full width for input and textarea */
+  padding: 10px; /* Padding inside input and textarea */
+  margin-bottom: 15px; /* Space below inputs */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+}
+
+.edit-restaurant input:focus,
+.edit-restaurant textarea:focus {
+  border-color: #4CAF50; /* Green border on focus */
+  outline: none; /* Remove outline */
+}
+
+.edit-restaurant button {
+  padding: 10px 15px; /* Padding for button */
+  background-color: #4CAF50; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Button text size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.edit-restaurant button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Add this to your App.css */
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.checkout-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.checkout-button:hover {
+  background-color: #218838;
+}
+
