@@ -30,7 +30,7 @@ function App() {
     );
     setEditingRestaurant(null); // Clear the editing state after saving
   };
-
+//deleting
   const deleteRestaurant = (id) => {
     setRestaurants(restaurants.filter((restaurant) => restaurant.id !== id));
   };
